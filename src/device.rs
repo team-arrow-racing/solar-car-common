@@ -1,3 +1,6 @@
+use sae_j1939::IdExtended;
+use bxcan::{Data, ExtendedId, Frame};
+
 /// Vehicle devices
 pub enum Device {
     VehicleController,
@@ -26,4 +29,18 @@ pub fn base_address(device: Device) -> Option<u16> {
         Device::MpptB => Some(0x610),
         _ => None,
     }
+}
+
+pub fn heartbeat_msg(device: Device) -> Frame {
+    let id = IdExtended {
+        priority: 6,
+        ext_data_page: false,
+        data_page: false,
+        pdu_format: 0xFF,
+        pdu_specific: 0x00,
+        source_address: source_address(device).unwrap(),
+    };
+
+    // TODO: decicde on heartbeat contents
+    Frame::new_data(ExtendedId::new(id.to_bits()).unwrap(), Data::empty())
 }
