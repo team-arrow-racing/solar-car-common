@@ -1,3 +1,4 @@
+/// Vehicle devices
 pub enum Device {
     VehicleController,
     SteeringWheel,
@@ -7,7 +8,8 @@ pub enum Device {
     MpptB,
 }
 
-pub fn device_source_address(device: Device) -> Option<u8> {
+/// Get J1939 source address
+pub fn source_address(device: Device) -> Option<u8> {
     match device {
         Device::VehicleController => Some(0x10),
         Device::SteeringWheel => Some(0x20),
@@ -16,7 +18,8 @@ pub fn device_source_address(device: Device) -> Option<u8> {
     }
 }
 
-pub fn device_base_address(device: Device) -> Option<u16> {
+/// Get base address for device (for legacy devices)
+pub fn base_address(device: Device) -> Option<u16> {
     match device {
         Device::WaveSculptor => Some(0x400),
         Device::MpptA => Some(0x600),
