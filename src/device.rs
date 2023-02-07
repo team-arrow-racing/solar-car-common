@@ -34,6 +34,7 @@ pub fn base_address(device: Device) -> Option<u16> {
     }
 }
 
+/// Construct a message to be sent at regular intervals with status information.
 pub fn heartbeat_msg(device: Device) -> Frame {
     let id = IdExtended {
         priority: 6,
