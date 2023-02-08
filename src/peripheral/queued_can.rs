@@ -1,3 +1,5 @@
+///! CAN wrapper using heapless queues for receive and transmit.
+
 use stm32l4xx_hal::{
     can::Can,
     gpio::{Alternate, PushPull, PA11, PA12},
