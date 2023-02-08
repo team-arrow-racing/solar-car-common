@@ -1,5 +1,5 @@
 use sae_j1939::IdExtended;
-use bxcan::{Data, ExtendedId, Frame};
+use bxcan::{ExtendedId, Frame};
 use bitflags::bitflags;
 use stm32l4xx_hal::pac;
 
@@ -32,21 +32,6 @@ pub fn base_address(device: Device) -> Option<u16> {
         Device::MpptB => Some(0x610),
         _ => None,
     }
-}
-
-/// Construct a message to be sent at regular intervals with status information.
-pub fn heartbeat_msg(device: Device) -> Frame {
-    let id = IdExtended {
-        priority: 6,
-        ext_data_page: false,
-        data_page: false,
-        pdu_format: 0xFF,
-        pdu_specific: 0x00,
-        source_address: source_address(device).unwrap(),
-    };
-
-    // TODO: decicde on heartbeat contents
-    Frame::new_data(ExtendedId::new(id.to_bits()).unwrap(), Data::empty())
 }
 
 /// To be sent on device initialisation.
