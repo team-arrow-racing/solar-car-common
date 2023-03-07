@@ -33,3 +33,7 @@ cargo add solar-car --git "https://gitlab.com/team-arrow-racing/arrow-3/solar-ca
 ## What shouldn't this contain
 
 - Drivers that are better split out into their own crate. (see `wurth-calypso`).
+
+## Other useful tools
+
+- [Online DBC File Editor](https://www.csselectronics.com/pages/dbc-editor-can-bus-database) (can be downloaded also).
