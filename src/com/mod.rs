@@ -2,6 +2,7 @@
 
 pub mod heartbeat;
 pub mod startup;
+pub mod array;
 
 /// Message priority.
 /// 
