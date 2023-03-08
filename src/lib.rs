@@ -6,4 +6,4 @@ pub mod device;
 pub mod peripheral;
 
 // re-export module
-pub use sae_j1939::{self};
+pub use j1939::{self};

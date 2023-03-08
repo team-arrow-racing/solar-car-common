@@ -5,7 +5,6 @@
 //! > A power-on reset occurrence shall be unambiguously identifiable via
 //! > telemetry. 
 
-use sae_j1939::IdExtended;
 use bxcan::{Frame, ExtendedId};
 use crate::device::{Device, source_address};
 use bitflags::bitflags;
@@ -14,7 +13,7 @@ use crate::com::{MessageFormat, GroupExtension};
 
 /// Construct a message to be sent on device initialisation.
 pub fn message(device: Device) -> Frame {
-    let id = IdExtended {
+    let id = j1939::ExtendedId {
         priority: 3,
         ext_data_page: false,
         data_page: false,

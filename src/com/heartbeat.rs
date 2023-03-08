@@ -1,6 +1,5 @@
 ///! Standardised heartbeat messaging.
 
-use sae_j1939::IdExtended;
 use bxcan::{Data, Frame, ExtendedId};
 use crate::device::{Device, source_address};
 use crate::com::Priority;
@@ -8,7 +7,7 @@ use crate::com::{MessageFormat, GroupExtension};
 
 /// Construct a message to be sent at regular intervals with status information.
 pub fn message(device: Device) -> Frame {
-    let id = IdExtended {
+    let id = j1939::ExtendedId {
         priority: Priority::Default as u8,
         ext_data_page: false,
         data_page: false,

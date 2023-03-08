@@ -3,12 +3,11 @@
 use crate::com::{MessageFormat};
 use crate::device::{source_address, Device};
 use bxcan::{Data, ExtendedId, Frame};
-use sae_j1939::IdExtended;
 
 use super::Priority;
 
 pub fn start_precharge(device: Device) -> Frame {
-    let id = IdExtended {
+    let id = j1939::ExtendedId {
         priority: Priority::Control as u8,
         ext_data_page: false,
         data_page: false,
@@ -21,7 +20,7 @@ pub fn start_precharge(device: Device) -> Frame {
 }
 
 pub fn isolate(device: Device) -> Frame {
-    let id = IdExtended {
+    let id = j1939::ExtendedId {
         priority: Priority::Important as u8,
         ext_data_page: false,
         data_page: false,
