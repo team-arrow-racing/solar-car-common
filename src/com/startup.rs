@@ -10,6 +10,7 @@ use bxcan::{Frame, ExtendedId};
 use crate::device::{Device, source_address};
 use bitflags::bitflags;
 use stm32l4xx_hal::pac;
+use crate::com::{MessageFormat, GroupExtension};
 
 /// Construct a message to be sent on device initialisation.
 pub fn message(device: Device) -> Frame {
@@ -17,8 +18,8 @@ pub fn message(device: Device) -> Frame {
         priority: 3,
         ext_data_page: false,
         data_page: false,
-        pdu_format: 0xFF,
-        pdu_specific: 0x00,
+        pdu_format: MessageFormat::Startup as u8,
+        pdu_specific: GroupExtension::Default as u8,
         source_address: source_address(device).unwrap(),
     };
 
