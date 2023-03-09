@@ -1,6 +1,6 @@
 //! Array controller messages
 
-use crate::com::{MessageFormat};
+use crate::com::MessageFormat;
 use crate::device::{source_address, Device};
 use bxcan::{Data, ExtendedId, Frame};
 
