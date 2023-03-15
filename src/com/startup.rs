@@ -51,11 +51,9 @@ fn reset_flags() -> LastResetCause {
     let hardware = csr.read().pinrstf().bit();
     let software = csr.read().sftrstf().bit();
     let brownout = csr.read().borrstf().bit();
-    let watchdog =
-        csr.read().wwdgrstf().bit() || csr.read().iwdgrstf().bit();
-    let other = csr.read().lpwrstf().bit()
-        || csr.read().oblrstf().bit()
-        || csr.read().firewallrstf().bit();
+    let watchdog = csr.read().wwdgrstf().bit() || csr.read().iwdgrstf().bit();
+    let other =
+        csr.read().lpwrstf().bit() || csr.read().oblrstf().bit() || csr.read().firewallrstf().bit();
 
     // set flags
     let mut reset_flags = LastResetCause::empty();
