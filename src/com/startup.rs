@@ -1,24 +1,29 @@
 //! Standardised power-on reset messaging.
-//! 
+//!
 //! This functionality is inspired by [GSFC-STD-1000](https://lws.larc.nasa.gov/pdf_files/3.11%20GSFC-STD-1000Revg_signature.pdf)
-//! Rule 2.26: 
+//! Rule 2.26:
 //! > A power-on reset occurrence shall be unambiguously identifiable via
-//! > telemetry. 
+//! > telemetry.
 
-use bxcan::{Frame, ExtendedId};
-use crate::device::{Device, source_address};
+use crate::com::{GroupExtension, MessageFormat};
+use crate::device::{source_address, Device};
 use bitflags::bitflags;
+use bxcan::{ExtendedId, Frame};
+use j1939::pgn::{Number, Pgn};
 use stm32l4xx_hal::pac;
-use crate::com::{MessageFormat, GroupExtension};
+
+static PGN_STARTUP: Number = Number {
+    specific: GroupExtension::Default as u8,
+    format: MessageFormat::Startup as u8,
+    data_page: false,
+    extended_data_page: false,
+};
 
 /// Construct a message to be sent on device initialisation.
 pub fn message(device: Device) -> Frame {
     let id = j1939::ExtendedId {
         priority: 3,
-        ext_data_page: false,
-        data_page: false,
-        pdu_format: MessageFormat::Startup as u8,
-        pdu_specific: GroupExtension::Default as u8,
+        pgn: Pgn::new(PGN_STARTUP),
         source_address: source_address(device).unwrap(),
     };
 
