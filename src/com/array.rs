@@ -41,7 +41,7 @@ pub fn isolate(device: Device) -> Frame {
     Frame::new_data(ExtendedId::new(id.to_bits()).unwrap(), Data::empty())
 }
 
-const PGN_FEED_WATCHDOG: Number = Number {
+pub const PGN_FEED_WATCHDOG: Number = Number {
     specific: Device::ArrayIsolationController as u8,
     format: MessageFormat::Heartbeat as u8,
     data_page: false,
