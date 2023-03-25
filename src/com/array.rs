@@ -41,7 +41,7 @@ pub fn isolate(device: Device) -> Frame {
     Frame::new_data(ExtendedId::new(id.to_bits()).unwrap(), Data::empty())
 }
 
-const PGN_VCU_TO_AIC: Number = Number {
+const PGN_FEED_WATCHDOG: Number = Number {
     specific: Device::ArrayIsolationController as u8,
     format: MessageFormat::Heartbeat as u8,
     data_page: false,
@@ -51,7 +51,7 @@ const PGN_VCU_TO_AIC: Number = Number {
 pub fn vcu_comms(device: Device) -> Frame {
     let id = j1939::ExtendedId {
         priority: Priority::Default as u8,
-        pgn: Pgn::new(PGN_VCU_TO_AIC),
+        pgn: Pgn::new(PGN_FEED_WATCHDOG),
         source_address: source_address(device).unwrap(),
     };
 
