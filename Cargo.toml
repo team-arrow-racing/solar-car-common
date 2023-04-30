@@ -17,8 +17,8 @@ stm32l4xx-hal = { version = "0.7.1", features = ["rt"] }
 [dependencies.j1939]
 version = "0.1.1"
 features = ["bxcan"]
-git = "https://gitlab.com/team-arrow-racing/sae-j1939"
-# path = "../sae-j1939" # for local development
+git = "https://github.com/team-arrow-racing/sae-j1939-rs"
+# path = "../sae-j1939-rs" # for local development
 
 [features]
 default = ["stm32l451"]
