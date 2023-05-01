@@ -1,15 +1,15 @@
 //! Communications module.
 
-pub mod heartbeat;
-pub mod startup;
 pub mod array;
+pub mod heartbeat;
 pub mod lighting;
+pub mod startup;
 
 /// Message priority.
-/// 
+///
 /// These are mostly used to control message arbitration and not necessarily
 /// ever read.
-/// 
+///
 /// We will fill these in 0 to 7 as necesarry.
 #[derive(Default, Copy, Clone)]
 pub enum Priority {
@@ -30,7 +30,6 @@ pub enum Priority {
 
     // Not in use
     // Reserved = 5,
-
     /// Default message priority.
     #[default]
     Default = 6,
@@ -43,13 +42,13 @@ pub enum Priority {
 #[repr(u8)]
 pub enum MessageFormat {
     // broadcast messages
-
     /// Startup status message
     Startup = 0xF0,
     /// Heartbeat status message
     Heartbeat = 0xF1,
 
     // addressable messages
+
     // Lighting message
     Lighting = 0x42,
 
@@ -65,7 +64,7 @@ pub enum MessageFormat {
 // crates that do this witha macro but i'm unsure if i trust them.
 impl TryFrom<u8> for MessageFormat {
     type Error = &'static str;
-    
+
     fn try_from(value: u8) -> Result<Self, Self::Error> {
         const STARTUP: u8 = MessageFormat::Startup as u8;
         const HEARTBEAT: u8 = MessageFormat::Heartbeat as u8;
