@@ -1,8 +1,8 @@
 use crate::com::MessageFormat;
 use crate::device::{source_address, Device};
+use bitflags::bitflags;
 use bxcan::{ExtendedId, Frame};
 use j1939::pgn::{Number, Pgn};
-use bitflags::bitflags;
 
 use super::Priority;
 

@@ -15,7 +15,7 @@ pub fn source_address(device: Device) -> Option<u8> {
         Device::VehicleController => Some(0x10),
         Device::SteeringWheel => Some(0x20),
         Device::ArrayIsolationController => Some(0x30),
-        _ => None
+        _ => None,
     }
 }
 
