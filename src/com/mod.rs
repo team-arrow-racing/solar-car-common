@@ -9,8 +9,6 @@ pub mod startup;
 ///
 /// These are mostly used to control message arbitration and not necessarily
 /// ever read.
-///
-/// We will fill these in 0 to 7 as necesarry.
 #[derive(Default, Copy, Clone)]
 pub enum Priority {
     /// Messages that may be safety critical in delivery.
