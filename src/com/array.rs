@@ -48,7 +48,7 @@ pub const PGN_FEED_WATCHDOG: Number = Number {
     extended_data_page: false,
 };
 
-pub fn vcu_comms(device: Device) -> Frame {
+pub fn feed_watchdog(device: Device) -> Frame {
     let id = j1939::ExtendedId {
         priority: Priority::Default as u8,
         pgn: Pgn::new(PGN_FEED_WATCHDOG),
