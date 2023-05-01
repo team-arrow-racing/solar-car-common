@@ -49,7 +49,7 @@ bitflags! {
 
 /// Get last reset cause from hardware registers
 fn reset_flags() -> LastResetCause {
-    // safe to steal since we're only touching flags
+    // safe to steal since we're only reading flags
     let csr = unsafe { &pac::Peripherals::steal().RCC.csr };
 
     // get flag states from register.
