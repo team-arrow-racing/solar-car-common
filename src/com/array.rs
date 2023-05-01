@@ -50,7 +50,7 @@ pub const PGN_FEED_WATCHDOG: Number = Number {
 
 pub fn feed_watchdog(device: Device) -> Frame {
     let id = j1939::ExtendedId {
-        priority: Priority::Default as u8,
+        priority: Priority::Control as u8,
         pgn: Pgn::new(PGN_FEED_WATCHDOG),
         source_address: source_address(device).unwrap(),
     };
