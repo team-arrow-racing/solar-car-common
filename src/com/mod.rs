@@ -3,6 +3,7 @@
 pub mod heartbeat;
 pub mod startup;
 pub mod array;
+pub mod lighting;
 
 /// Message priority.
 /// 
@@ -49,6 +50,8 @@ pub enum MessageFormat {
     Heartbeat = 0xF1,
 
     // addressable messages
+    // Lighting message
+    Lighting = 0x42,
 
     /// Generic reset command message
     Reset = 0x00,
