@@ -10,7 +10,6 @@ use crate::device::{source_address, Device};
 use bitflags::bitflags;
 use bxcan::{ExtendedId, Frame};
 use j1939::pgn::{Number, Pgn};
-use stm32l4xx_hal::pac;
 
 static PGN_STARTUP: Number = Number {
     specific: GroupExtension::Default as u8,
@@ -29,7 +28,10 @@ pub fn message(device: Device) -> Frame {
 
     Frame::new_data(
         ExtendedId::new(id.to_bits()).unwrap(),
+        #[cfg(feature = "stm32l4")]
         [reset_flags().bits()],
+        #[cfg(not(feature = "stm32l4"))]
+        [],
     )
 }
 
@@ -47,10 +49,11 @@ bitflags! {
     }
 }
 
+#[cfg(feature = "stm32l4")]
 /// Get last reset cause from hardware registers
 fn reset_flags() -> LastResetCause {
     // safe to steal since we're only reading flags
-    let csr = unsafe { &pac::Peripherals::steal().RCC.csr };
+    let csr = unsafe { &stm32l4xx_hal::pac::Peripherals::steal().RCC.csr };
 
     // get flag states from register.
     let hardware = csr.read().pinrstf().bit();
