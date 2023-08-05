@@ -3,7 +3,7 @@
 This is a common library shared between device projects to facilitate shared
 communication and deduplication of utility code.
 
-Whilst this is a cargo library, it is not intended to by published to the crate
+Whilst this is a cargo library, it is not intended to be published to the crate
 registry.
 
 ## How to use
