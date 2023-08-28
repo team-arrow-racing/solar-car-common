@@ -4,6 +4,7 @@ pub mod array;
 pub mod heartbeat;
 pub mod lighting;
 pub mod startup;
+pub mod horn;
 
 /// Message priority.
 ///
