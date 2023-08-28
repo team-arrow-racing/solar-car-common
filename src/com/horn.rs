@@ -1,6 +1,5 @@
-use crate::com::MessageFormat;
+use crate::com::Priority;
 use crate::device::{source_address, Device};
-use bitflags::bitflags;
 use bxcan::{ExtendedId, Frame};
 use j1939::pgn::{Number, Pgn};
 
@@ -10,7 +9,7 @@ pub enum HornMessageFormat {
 }
 
 pub const PGN_HORN_MESSAGE: Number = Number {
-    specific: device::Device::VehicleController as u8,
+    specific: Device::VehicleController as u8,
     format: HornMessageFormat::Enable as u8,
     data_page: false,
     extended_data_page: false,
