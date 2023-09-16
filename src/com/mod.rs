@@ -5,6 +5,7 @@ pub mod heartbeat;
 pub mod lighting;
 pub mod startup;
 pub mod horn;
+pub mod wavesculptor;
 
 /// Message priority.
 ///
@@ -50,6 +51,13 @@ pub enum MessageFormat {
 
     // Lighting message
     Lighting = 0x42,
+
+    // Speed message
+    Speed = 0x95, // kachow
+
+    Battery = 0xBB,
+
+    Temperature = 0x73,
 
     /// Generic reset command message
     Reset = 0x00,
