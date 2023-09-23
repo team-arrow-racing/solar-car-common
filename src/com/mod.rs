@@ -62,6 +62,8 @@ pub enum MessageFormat {
     // Driver control type (For torque or cruise modes)
     ControlType = 0xC7,
 
+    DriverMode = 0xD7,
+
     /// Generic reset command message
     Reset = 0x00,
     /// Generic enable command message

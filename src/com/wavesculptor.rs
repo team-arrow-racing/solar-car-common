@@ -6,16 +6,39 @@ use j1939::pgn::{Number, Pgn};
 use super::Priority;
 
 #[repr(u8)]
+#[derive(PartialEq)]
 pub enum ControlTypes {
     Torque = 0, // Default
     Cruise = 1
 }
 
+impl From<u8> for ControlTypes {
+    fn from(val: u8) -> ControlTypes {
+        match val {
+            0 => ControlTypes::Torque,
+            1 => ControlTypes::Cruise,
+            _ => ControlTypes::Torque,
+        }
+    }
+}
+
 #[repr(u8)]
+#[derive(PartialEq)]
 pub enum DriverModes {
     Drive = 0,
     Neutral = 1,
-    Reverse = 2
+    Reverse = 2,
+}
+
+impl From<u8> for DriverModes {
+    fn from(val: u8) -> DriverModes {
+        match val {
+            0 => DriverModes::Drive,
+            1 => DriverModes::Neutral,
+            2 => DriverModes::Reverse,
+            _ => DriverModes::Neutral // Default should be neutral
+        }
+    }
 }
 
 pub const PGN_SPEED_MESSAGE: Number = Number {
@@ -42,6 +65,13 @@ pub const PGN_TEMPERATURE_MESSAGE: Number = Number {
 pub const PGN_SET_DRIVE_CONTROL_TYPE: Number = Number {
     specific: Device::VehicleController as u8,
     format: MessageFormat::ControlType as u8,
+    data_page: false,
+    extended_data_page: false
+};
+
+pub const PGN_SET_DRIVER_MODE: Number = Number {
+    specific: Device::VehicleController as u8,
+    format: MessageFormat::DriverMode as u8,
     data_page: false,
     extended_data_page: false
 };
@@ -84,4 +114,14 @@ pub fn control_type_message(device: Device, control_type: ControlTypes) -> Frame
     };
 
     Frame::new_data(ExtendedId::new(id.to_bits()).unwrap(), [control_type as u8])
+}
+
+pub fn control_mode_message(device: Device, driver_mode: DriverModes) -> Frame {
+    let id = j1939::ExtendedId {
+        priority: Priority::Critical as u8,
+        pgn: Pgn::new(PGN_SET_DRIVER_MODE),
+        source_address: source_address(device).unwrap(),
+    };
+
+    Frame::new_data(ExtendedId::new(id.to_bits()).unwrap(), [driver_mode as u8])
 }
