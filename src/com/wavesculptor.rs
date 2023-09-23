@@ -11,6 +11,13 @@ pub enum ControlTypes {
     Cruise = 1
 }
 
+#[repr(u8)]
+pub enum DriverModes {
+    Drive = 0,
+    Neutral = 1,
+    Reverse = 2
+}
+
 pub const PGN_SPEED_MESSAGE: Number = Number {
     specific: Device::SteeringWheel as u8,
     format: MessageFormat::Speed as u8,
