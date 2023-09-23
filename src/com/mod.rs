@@ -59,6 +59,9 @@ pub enum MessageFormat {
 
     Temperature = 0x73,
 
+    // Driver control type (For torque or cruise modes)
+    ControlType = 0xC7,
+
     /// Generic reset command message
     Reset = 0x00,
     /// Generic enable command message
