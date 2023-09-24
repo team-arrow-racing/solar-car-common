@@ -83,7 +83,7 @@ pub fn speed_message(device: Device, speed: f32) -> Frame {
         source_address: source_address(device).unwrap(),
     };
 
-    Frame::new_data(ExtendedId::new(id.to_bits()).unwrap(), [speed as u8])
+    Frame::new_data(ExtendedId::new(id.to_bits()).unwrap(), speed.to_le_bytes())
 }
 
 pub fn battery_message(device: Device, battery: f32) -> Frame {
@@ -93,7 +93,7 @@ pub fn battery_message(device: Device, battery: f32) -> Frame {
         source_address: source_address(device).unwrap(),
     };
 
-    Frame::new_data(ExtendedId::new(id.to_bits()).unwrap(), [battery as u8])
+    Frame::new_data(ExtendedId::new(id.to_bits()).unwrap(), battery.to_le_bytes())
 }
 
 pub fn temperature_message(device: Device, temp: f32) -> Frame {
@@ -103,7 +103,7 @@ pub fn temperature_message(device: Device, temp: f32) -> Frame {
         source_address: source_address(device).unwrap(),
     };
 
-    Frame::new_data(ExtendedId::new(id.to_bits()).unwrap(), [temp as u8])
+    Frame::new_data(ExtendedId::new(id.to_bits()).unwrap(), temp.to_le_bytes())
 }
 
 pub fn control_type_message(device: Device, control_type: ControlTypes) -> Frame {
