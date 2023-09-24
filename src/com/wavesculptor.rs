@@ -6,7 +6,7 @@ use j1939::pgn::{Number, Pgn};
 use super::Priority;
 
 #[repr(u8)]
-#[derive(PartialEq)]
+#[derive(PartialEq, Copy, Clone)]
 pub enum ControlTypes {
     Torque = 0, // Default
     Cruise = 1
@@ -23,7 +23,7 @@ impl From<u8> for ControlTypes {
 }
 
 #[repr(u8)]
-#[derive(PartialEq)]
+#[derive(PartialEq, Copy, Clone, Debug)]
 pub enum DriverModes {
     Drive = 0,
     Neutral = 1,
@@ -116,7 +116,7 @@ pub fn control_type_message(device: Device, control_type: ControlTypes) -> Frame
     Frame::new_data(ExtendedId::new(id.to_bits()).unwrap(), [control_type as u8])
 }
 
-pub fn control_mode_message(device: Device, driver_mode: DriverModes) -> Frame {
+pub fn driver_mode_message(device: Device, driver_mode: DriverModes) -> Frame {
     let id = j1939::ExtendedId {
         priority: Priority::Critical as u8,
         pgn: Pgn::new(PGN_SET_DRIVER_MODE),
