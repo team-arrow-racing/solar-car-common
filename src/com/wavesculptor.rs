@@ -6,23 +6,6 @@ use j1939::pgn::{Number, Pgn};
 use super::Priority;
 
 #[repr(u8)]
-#[derive(PartialEq, Copy, Clone)]
-pub enum ControlTypes {
-    Torque = 0, // Default
-    Cruise = 1
-}
-
-impl From<u8> for ControlTypes {
-    fn from(val: u8) -> ControlTypes {
-        match val {
-            0 => ControlTypes::Torque,
-            1 => ControlTypes::Cruise,
-            _ => ControlTypes::Torque,
-        }
-    }
-}
-
-#[repr(u8)]
 #[derive(PartialEq, Copy, Clone, Debug)]
 pub enum DriverModes {
     Drive = 0,
@@ -106,7 +89,7 @@ pub fn temperature_message(device: Device, temp: f32) -> Frame {
     Frame::new_data(ExtendedId::new(id.to_bits()).unwrap(), temp.to_le_bytes())
 }
 
-pub fn control_type_message(device: Device, control_type: ControlTypes) -> Frame {
+pub fn control_type_message(device: Device, control_type: bool) -> Frame {
     let id = j1939::ExtendedId {
         priority: Priority::Critical as u8,
         pgn: Pgn::new(PGN_SET_DRIVE_CONTROL_TYPE),
