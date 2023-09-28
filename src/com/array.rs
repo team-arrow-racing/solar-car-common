@@ -57,3 +57,20 @@ pub fn feed_watchdog(device: Device) -> Frame {
 
     Frame::new_data(ExtendedId::new(id.to_bits()).unwrap(), Data::empty())
 }
+
+pub const PGN_ENABLE_CONTACTORS: Number = Number {
+    specific: Device::VehicleController as u8,
+    format: MessageFormat::Enable as u8,
+    data_page: false,
+    extended_data_page: false,
+};
+
+pub fn enable_contactors_message(device: Device) -> Frame {
+    let id = j1939::ExtendedId {
+        priority: Priority::Critical as u8,
+        pgn: Pgn::new(PGN_ENABLE_CONTACTORS),
+        source_address: source_address(device).unwrap(),
+    };
+
+    Frame::new_data(ExtendedId::new(id.to_bits()).unwrap(), Data::empty())
+}
