@@ -65,12 +65,12 @@ pub const PGN_ENABLE_CONTACTORS: Number = Number {
     extended_data_page: false,
 };
 
-pub fn enable_contactors_message(device: Device) -> Frame {
+pub fn enable_contactors_message(device: Device, state: bool) -> Frame {
     let id = j1939::ExtendedId {
         priority: Priority::Critical as u8,
         pgn: Pgn::new(PGN_ENABLE_CONTACTORS),
         source_address: source_address(device).unwrap(),
     };
 
-    Frame::new_data(ExtendedId::new(id.to_bits()).unwrap(), Data::empty())
+    Frame::new_data(ExtendedId::new(id.to_bits()).unwrap(), [state as u8])
 }
