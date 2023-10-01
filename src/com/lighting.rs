@@ -30,12 +30,12 @@ pub const PGN_LIGHTING_STATE: Number = Number {
     extended_data_page: false,
 };
 
-pub fn message(device: Device, state: u8, value: u8) -> Frame {
+pub fn message(device: Device, lamp: LampsState, value: u8) -> Frame {
     let id = j1939::ExtendedId {
         priority: Priority::Default as u8,
         pgn: Pgn::new(PGN_LIGHTING_STATE),
         source_address: source_address(device).unwrap(),
     };
 
-    Frame::new_data(ExtendedId::new(id.to_bits()).unwrap(), [state, value])
+    Frame::new_data(ExtendedId::new(id.to_bits()).unwrap(), [lamp.bits(), value])
 }
