@@ -8,16 +8,16 @@ use super::Priority;
 #[repr(u8)]
 #[derive(PartialEq, Copy, Clone, Debug)]
 pub enum DriverModes {
-    Neutral = 0,
-    Drive = 1,
+    Neutral = 1,
+    Drive = 0,
     Reverse = 2,
 }
 
 impl From<u8> for DriverModes {
     fn from(val: u8) -> DriverModes {
         match val {
-            0 => DriverModes::Neutral,
-            1 => DriverModes::Drive,
+            1 => DriverModes::Neutral,
+            0 => DriverModes::Drive,
             2 => DriverModes::Reverse,
             _ => DriverModes::Neutral // Default should be neutral
         }
