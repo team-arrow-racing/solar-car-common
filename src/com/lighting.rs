@@ -1,4 +1,3 @@
-use crate::comms::{MessageFormat, Priority};
 use crate::device::{source_address, Device};
 use bitflags::bitflags;
 
