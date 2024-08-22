@@ -14,13 +14,13 @@ project by referencing the Git repository directly.
 ```toml
 [dependencies.solar-car]
 version = "0.1.1"
-git = "https://gitlab.com/team-arrow-racing/arrow-3/solar-car"
+git = "https://github.com/team-arrow-racing/solar-car-common.git"
 ```
 
 or via the CLI
 
 ```shell
-cargo add solar-car --git "https://gitlab.com/team-arrow-racing/arrow-3/solar-car"
+cargo add solar-car --git "https://github.com/team-arrow-racing/solar-car-common.git"
 ```
 
 ## What this should contain
