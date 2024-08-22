@@ -1,10 +1,10 @@
-use crate::com::MessageFormat;
+use crate::comms::{MessageFormat, Priority};
 use crate::device::{source_address, Device};
 use bitflags::bitflags;
-use bxcan::{ExtendedId, Frame};
+
+use fdcan::{frame::{TxFrameHeader, FrameFormat}, id::{Id, ExtendedId}};
 use j1939::pgn::{Number, Pgn};
 
-use super::Priority;
 
 bitflags! {
     /// As per
@@ -30,12 +30,22 @@ pub const PGN_LIGHTING_STATE: Number = Number {
     extended_data_page: false,
 };
 
-pub fn message(device: Device, lamp: LampsState, value: u8) -> Frame {
-    let id = j1939::ExtendedId {
+pub fn lighting_header(device: Device) -> TxFrameHeader {
+    //Construct id
+    let j1939id = j1939::ExtendedId{
         priority: Priority::Default as u8,
         pgn: Pgn::new(PGN_LIGHTING_STATE),
         source_address: source_address(device).unwrap(),
     };
 
-    Frame::new_data(ExtendedId::new(id.to_bits()).unwrap(), [lamp.bits(), value])
+    //Construct header
+    let header = TxFrameHeader {
+        len: 1,
+        frame_format: FrameFormat::Fdcan,
+        id: Id::Extended(ExtendedId::new(j1939id.to_bits()).unwrap()),
+        bit_rate_switching: true,
+        marker: None
+    };
+
+    header
 }
