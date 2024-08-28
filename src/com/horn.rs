@@ -1,8 +1,8 @@
-use crate::comms::Priority;
 use crate::device::{source_address, Device};
 
 use fdcan::{frame::{TxFrameHeader, FrameFormat}, id::{Id, ExtendedId}};
 use j1939::pgn::{Number, Pgn};
+use crate::com::{MessageFormat, Priority};
 
 #[repr(u8)]
 pub enum HornMessageFormat {

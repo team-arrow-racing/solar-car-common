@@ -3,6 +3,7 @@ use bitflags::bitflags;
 
 use fdcan::{frame::{TxFrameHeader, FrameFormat}, id::{Id, ExtendedId}};
 use j1939::pgn::{Number, Pgn};
+use crate::com::{MessageFormat, Priority};
 
 
 bitflags! {
